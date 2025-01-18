@@ -1,11 +1,11 @@
 import os
 from imaplib import IMAP4, IMAP4_SSL
-from typing import Callable, Optional
+from typing import Callable
 
 
 class IMAP4Client:
     def __init__(self) -> None:
-        self.connection: Optional[IMAP4_SSL]
+        self.connection: IMAP4_SSL | None
 
         self.try_connect(
             host=os.getenv("IMAP_HOST", "host"),
@@ -19,7 +19,7 @@ class IMAP4Client:
         try:
             connection = IMAP4_SSL(host=host, port=port)
 
-            connection.login(user=user, password=password)
+            _ = connection.login(user=user, password=password)
 
             self.connection = connection
 
@@ -33,7 +33,7 @@ class IMAP4Client:
         """Method to close an IMAP connection if one is established."""
         if not self.connection:
             return print(f"Connection is not established. Already closed.")
-        self.connection.close()
+        _ = self.connection.close()
         self.connection = None
         print("Connection closed.")
 
