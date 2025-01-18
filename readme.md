@@ -3,8 +3,6 @@ Python3 boilerplate code for Mail Management
 
 Implemented modules:
     - IMAP
-    - POP3
-    - SMTP
 
 # Installing
 1. Init venv:
